@@ -9,7 +9,7 @@ The module is designed to provide communication between hospital, employees(admi
 A client can check-in through the administrator (__Administrator:checkIn(name, citizenId)__) and ask for services provided by the clinic (__Administrator:getServiceList()__).
 
 There can be multiple types of services (__Service:type__, Example: patient examination, taking a blood test, ...) each of them could have a cost (__Service:cost__). The service could also be complex in which case it would have child services (__Service:child services__). In the case of the complex service, cost should be calculated by aggregating prices of the child services and the price of the service itself (__Service:cost__).
-After choosing a service, the administrator could take an upfront payment (__Service Status:payed__) and would schedule an appointment with the doctor.
+After choosing a service, the administrator could take an upfront payment (__Service Status:payed__) and would schedule an appointment with the doctor (__Administrator:scheduleAppointment(cliendId, doctorId)__).
 
 The doctor provides the service at the appointment, the outcome of the service is tracked by status (__Service Status:currentStatus__). Service could be rescheduled (__Service Status:currentStatus__ Scheduled->Scheduled) in case if the doctor would decide to send a patient for additional tests or in order to fulfill the complex service requirements. For the complex services doctor verifies child services results (__Service Status:positive__ and __Service Status:result__) in order to determine the result of his service.
 
