@@ -2,6 +2,7 @@ package core;
 
 import util.ClinicManager;
 import util.Constants;
+import util.CertificationGenerator;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -76,9 +77,8 @@ public class Administrator extends Employee {
         return eligebleDoctors;
     }
 
-    public String createCertificate(Integer serviceStatusId) {
-        ServiceStatus serviceStatus = Catalog.getServiceStatus(serviceStatusId);
-
+    public String createCertificate(Integer serviceStatusId) throws Exception {
+        return new CertificationGenerator(serviceStatusId).generateCertificate();
     }
 
     public List<Service> getServiceList() {

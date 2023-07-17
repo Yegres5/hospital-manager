@@ -2,8 +2,6 @@ package core;
 
 import util.ClinicManager;
 import util.Constants;
-import java.util.List;
-import java.util.ListIterator;
 
 public class Doctor extends Employee {
     public Doctor(String name, String title) {
@@ -17,19 +15,15 @@ public class Doctor extends Employee {
         // do something usefull
         String result = uesfullWork(client, serviceStatus);
 
-        if (result != null) {
-            serviceStatus.positive = true;
-            serviceStatus.result = result;
-        } else {
-            serviceStatus.positive = false;
-        }
+        serviceStatus.positive = result != "";
+        serviceStatus.result = result;
 
         serviceStatus.currentStatus = Constants.ServiceStatus.FINISHED.getStatus();
         return serviceStatus.positive;
     }
 
     private String uesfullWork(Client client, ServiceStatus serviceStatus) {
-        if (serviceStatus.childServiceStatusIds == null && client.name == "Sick client") {
+        if (serviceStatus.childServiceStatusIds.isEmpty() && client.name == "Sick client") {
             return "You are sick";
         }
 
@@ -41,8 +35,6 @@ public class Doctor extends Employee {
             }
         }
 
-        if (result == "")
-            return null;
         return result;
     }
 }

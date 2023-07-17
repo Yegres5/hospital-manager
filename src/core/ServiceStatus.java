@@ -14,7 +14,7 @@ public class ServiceStatus {
     public Integer serviceId;
     public Integer clientId;
     public Integer parentServiceStatusId;
-    public List<Integer> childServiceStatusIds;
+    public List<Integer> childServiceStatusIds = new ArrayList<Integer>();
 
     public ServiceStatus(Boolean payed, Integer serviceId, Integer clientId, Integer parentServiceStatusId) {
         this.currentStatus = Constants.ServiceStatus.NEW.getStatus();

@@ -9,17 +9,17 @@ public class App {
                 // Default clinic creation
                 Clinic clinic = ClinicManager.getInstance();
 
-                Administrator administrator = new Administrator(
+                Administrator administrator = (Administrator) EmployeeFactory.createEmployee(
                                 "Default admin",
                                 Constants.EmployeeTitle.ADMINISTRATOR.getTitle());
                 clinic.addNewEmplooyee(administrator);
 
-                Doctor doctorPathologist = new Doctor(
+                Employee doctorPathologist = EmployeeFactory.createEmployee(
                                 "Default Pathologist",
                                 Constants.EmployeeTitle.PATHOLOGIST.getTitle());
                 clinic.addNewEmplooyee(doctorPathologist);
 
-                Doctor doctorPractitioner = new Doctor(
+                Employee doctorPractitioner = EmployeeFactory.createEmployee(
                                 "Default Practitioner",
                                 Constants.EmployeeTitle.PRACTITIONER.getTitle());
                 clinic.addNewEmplooyee(doctorPractitioner);
@@ -42,17 +42,19 @@ public class App {
 
                 // Client asks for list of services
                 List<Service> services = administrator.getServiceList();
+                System.out.println("Service list: ");
                 for (Service service : services) {
-                        System.out.println(service.serviceId + " " + service.name + " " + service.cost);
+                        System.out.println("ServiceId: " + service.serviceId + ", Name: " + service.name + ", Cost: "
+                                        + service.cost);
                 }
                 Service pickedComplexService = serviceExamination;
 
                 // Client goes through check in
-                Client client = administrator.checkIn("Default name", 007);
+                Client client = administrator.checkIn("Sick client", 007);
                 // Client choose the service
                 // Client registers for the service and pays the fees
                 System.out.println(
-                                "Price for full service: "
+                                "\nPrice for full service: "
                                                 + administrator.getServiceTotalCost(pickedComplexService.serviceId));
                 List<ServiceStatus> serviceStatuses = administrator.recievePaymentForService(
                                 pickedComplexService.serviceId,
@@ -82,6 +84,7 @@ public class App {
                 }
 
                 // Client visits the administrator and recieves the certificate
-
+                String certificate = administrator.createCertificate(serviceStatuses.get(0).serviceStatusId);
+                System.out.println(String.format("\nCertificate:\n%s", certificate));
         }
 }
