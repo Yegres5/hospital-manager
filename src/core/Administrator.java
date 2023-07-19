@@ -27,12 +27,12 @@ public class Administrator extends Employee {
         return null;
     }
 
-    public List<ServiceStatus> createPayedServiceStatuses(Integer serviceId, Integer clientId) {
+    private List<ServiceStatus> createPayedServiceStatuses(Integer serviceId, Integer clientId) {
         return createPayedServiceStatuses(serviceId, clientId, new ArrayList<ServiceStatus>(),
                 new HashMap<Integer, Integer>());
     }
 
-    public List<ServiceStatus> createPayedServiceStatuses(Integer serviceId, Integer clientId,
+    private List<ServiceStatus> createPayedServiceStatuses(Integer serviceId, Integer clientId,
             List<ServiceStatus> serviceStatuses, HashMap<Integer, Integer> serviceIdToServiceStatusId) {
 
         Service service = Catalog.getService(serviceId);
@@ -83,17 +83,5 @@ public class Administrator extends Employee {
 
     public List<Service> getServiceList() {
         return Catalog.getAllServices();
-    }
-
-    class UnpaidServiceStatusesException extends Exception {
-        private List<ServiceStatus> serviceStatuses;
-
-        public UnpaidServiceStatusesException(List<ServiceStatus> serviceStatuses) {
-            this.serviceStatuses = serviceStatuses;
-        }
-
-        public List<ServiceStatus> getUnpaidServiceStatuses() {
-            return serviceStatuses;
-        }
     }
 }
