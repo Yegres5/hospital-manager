@@ -6,6 +6,7 @@ import util.CertificationGenerator;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class Administrator extends Employee {
     public Administrator(String name, String title) {
@@ -65,16 +66,16 @@ public class Administrator extends Employee {
     }
 
     public List<Doctor> getDoctorsForService(Integer serviceId) {
-        List<Doctor> eligebleDoctors = new ArrayList<Doctor>();
+        List<Doctor> eligibleDoctors = new ArrayList<Doctor>();
         Service service = Catalog.getService(serviceId);
 
         for (Employee employee : ClinicManager.getInstance().getEmployeeList()) {
-            if (employee.title == Constants.ServiceTypeToEmploeeTitle.get(service.type)) {
-                eligebleDoctors.add((Doctor) employee);
+            if (Objects.equals(employee.title, Constants.ServiceTypeToEmploeeTitle.get(service.type))) {
+                eligibleDoctors.add((Doctor) employee);
             }
         }
 
-        return eligebleDoctors;
+        return eligibleDoctors;
     }
 
     public String createCertificate(Integer serviceStatusId) throws Exception {

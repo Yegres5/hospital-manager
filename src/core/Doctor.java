@@ -15,7 +15,7 @@ public class Doctor extends Employee {
         ServiceStatus serviceStatus = Catalog.getServiceStatus(appointment.serviceStatusId);
         Client client = Catalog.getClient(serviceStatus.clientId);
         // do something usefull
-        String result = uesfullWork(client, serviceStatus);
+        String result = usefullWork(client, serviceStatus);
 
         serviceStatus.positive = !Objects.equals(result, "");
         serviceStatus.result = result;
@@ -24,19 +24,19 @@ public class Doctor extends Employee {
         return serviceStatus.positive;
     }
 
-    private String uesfullWork(Client client, ServiceStatus serviceStatus) {
-        if (serviceStatus.childServiceStatusIds.isEmpty() && client.name == "Sick client") {
+    private String usefullWork(Client client, ServiceStatus serviceStatus) {
+        if (serviceStatus.childServiceStatusIds.isEmpty() && Objects.equals(client.name, "Sick client")) {
             return "You are sick";
         }
 
-        String result = "";
+        StringBuilder result = new StringBuilder();
 
         for (ServiceStatus childServiceStatus : serviceStatus.getChildServiceStatuses()) {
             if (childServiceStatus.positive) {
-                result += childServiceStatus.result;
+                result.append(childServiceStatus.result);
             }
         }
 
-        return result;
+        return result.toString();
     }
 }

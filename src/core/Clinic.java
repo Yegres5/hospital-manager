@@ -11,8 +11,8 @@ public class Clinic {
     public String name;
     public String address;
     private Float assets;
-    private HashMap<Integer, Employee> employees = new HashMap<Integer, Employee>();
-    private HashMap<Integer, Appointment> appointments = new HashMap<Integer, Appointment>();
+    private final HashMap<Integer, Employee> employees = new HashMap<Integer, Employee>();
+    private final HashMap<Integer, Appointment> appointments = new HashMap<Integer, Appointment>();
     private Integer lastEmployeeId = 0;
     private Integer lastAppointmentId = 0;
 

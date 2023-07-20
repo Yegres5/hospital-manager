@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class CertificationGenerator {
-    private ServiceStatus serviceStatus;
-    private List<ServiceStatus> failedServiceStatuses = new ArrayList<ServiceStatus>();
-    private String diagnosis;
-    private Boolean positive;
+    private final ServiceStatus serviceStatus;
+    private final List<ServiceStatus> failedServiceStatuses = new ArrayList<ServiceStatus>();
+    private final String diagnosis;
+    private final Boolean positive;
 
     public CertificationGenerator(Integer serviceStatusId) {
         serviceStatus = Catalog.getServiceStatus(serviceStatusId);
@@ -30,7 +30,7 @@ public class CertificationGenerator {
 
     private boolean isServiceStatusCompleted(Integer serviceStatusId) {
         ServiceStatus serviceStatus = Catalog.getServiceStatus(serviceStatusId);
-        Boolean allChildServicesCompleted = true;
+        boolean allChildServicesCompleted = true;
 
         for (Integer childServiceId : serviceStatus.childServiceStatusIds) {
             allChildServicesCompleted &= isServiceStatusCompleted(childServiceId);
