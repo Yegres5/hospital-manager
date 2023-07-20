@@ -19,7 +19,10 @@ public class CertificationGenerator {
 
     public String generateCertificate() throws Exception {
         if (isServiceStatusCompleted(serviceStatus.serviceStatusId)) {
-            return Certificate.createNewCertificate().setServiceResultOutcome(positive).addDetails(diagnosis)
+            return Certificate
+                    .createNewCertificate()
+                    .setServiceResultOutcome(positive)
+                    .addDetails(diagnosis)
                     .printCertificate();
         }
         throw new Exception("Service is not completed");
