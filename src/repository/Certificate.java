@@ -1,8 +1,8 @@
 package repository;
 
 public class Certificate {
-    private String certificateInfo;
-    private Diagnosis diagnosis;
+    private final String certificateInfo;
+    private final Diagnosis diagnosis;
     public Certificate(Diagnosis diagnosis, String certificateInfo) {
         this.diagnosis = diagnosis;
         this.certificateInfo = certificateInfo;

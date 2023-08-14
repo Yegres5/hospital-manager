@@ -3,7 +3,6 @@ package client_care_provider;
 import clinic_interface.AdministratorTerminal;
 import repository.*;
 import schedule.Appointment;
-import schedule.ScheduleService;
 
 import java.util.ArrayList;
 
@@ -15,13 +14,12 @@ public class Administrator extends Employee {
         this.terminal = terminal;
     }
 
-    public ArrayList<MedicalTest> getMedicalTestsList() {
-        return terminal.getMedicalTestsList();
+    public ArrayList<MedicalTest> getMedicalTests() {
+        return terminal.getMedicalTests();
     }
 
-    public ArrayList<Appointment> registerCheckUpAppointment(Client client) {
-        MedicalTest checkUpTest = RepositoryService.getCheckUpTest();
-        return scheduleAppointment(checkUpTest, client);
+    public MedicalTest getCheckUpTest() {
+        return terminal.getCheckUpMedicalTest();
     }
 
     public ArrayList<Appointment> processMedicalTestPayment(Client client, MedicalTest medicalTest) {

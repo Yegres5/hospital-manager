@@ -3,13 +3,14 @@ package repository;
 import clinic_staff.DoctorTitle;
 
 public abstract class MedicalTest {
-    private DoctorTitle requiredDoctor;
-    private Float cost;
-    private String name;
+    private final DoctorTitle requiredDoctor;
+    private final Float cost;
+    private final String name;
 
     public MedicalTest(DoctorTitle doctorTitle, Float cost, String name) {
         this.requiredDoctor = doctorTitle;
         this.cost = cost;
+        this.name = name;
     }
 
     public DoctorTitle getRequiredDoctor() {

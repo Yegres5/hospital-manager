@@ -17,15 +17,15 @@ public class RepositoryService {
         return medicalTests;
     }
 
+    public static Patient getPatient(Client client) {
+        return patientByClientStateId.get(client.getStateId());
+    }
+
     public static MedicalTest getCheckUpTest() {
         return medicalTests.stream()
                 .filter(medicalTest -> Objects.equals(medicalTest.getName(), "Check Up"))
                 .findAny()
                 .orElse(null);
-    }
-
-    public static Patient getPatient(Client client) {
-        return patientByClientStateId.get(client.getStateId());
     }
 
     public static Diagnosis getDiagnosis(Patient patient, MedicalTest medicalTest) {

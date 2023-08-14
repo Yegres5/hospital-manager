@@ -27,16 +27,8 @@ public class Client {
         return personalData;
     }
 
-    public Administrator findAdministrator(Clinic clinic) {
-        return clinic.getAdministrator();
-    }
-
-    public Doctor findDoctor(Clinic clinic, Appointment appointment) {
-        return clinic.getDoctor(appointment);
-    }
-
     public ArrayList<MedicalTest> recieveMedicalTestList(Administrator administrator) {
-        return administrator.getMedicalTestsList();
+        return administrator.getMedicalTests();
     }
 
     public ArrayList<Appointment> payForMedicalTest(Administrator administrator, MedicalTest medicalTest) {
@@ -44,12 +36,12 @@ public class Client {
     }
 
     public Diagnosis visitAppointment(Clinic clinic, Appointment appointment) {
-        Doctor doctor = findDoctor(clinic, appointment);
+        Doctor doctor = appointment.getDoctor();
 
         return doctor.provideAppointmentTest(this, appointment);
     }
 
-    public Certificate getCertificate(Clinic clinic, MedicalTest medicalTest) {
-        return clinic.getAdministrator().generateCertificate(this, medicalTest);
+    public Certificate getCertificate(Administrator administrator, MedicalTest medicalTest) {
+        return administrator.generateCertificate(this, medicalTest);
     }
 }

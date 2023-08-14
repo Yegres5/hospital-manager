@@ -21,7 +21,7 @@ public class Doctor extends Employee {
         return title;
     }
 
-    public Diagnosis provideAppointmentTest(Client client, Appointment appointment) {
+    public Diagnosis provideAppointmentMedicalTest(Client client, Appointment appointment) {
         MedicalTest medicalTest = appointment.getMedicalTest();
         Patient patient = terminal.getPatient(client);
         String testResult = performMedicalTest(client, medicalTest);

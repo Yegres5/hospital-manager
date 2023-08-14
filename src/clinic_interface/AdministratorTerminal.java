@@ -27,7 +27,7 @@ public class AdministratorTerminal extends BasicTerminal{
         PaymentService.addFunds(funds);
     }
 
-    public ArrayList<MedicalTest> getMedicalTestsList() {
+    public ArrayList<MedicalTest> getMedicalTests() {
         return RepositoryService.getMedicalTests();
     }
 

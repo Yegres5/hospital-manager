@@ -1,9 +1,9 @@
 package payment;
 
 public class PaymentService {
-    private static Float _funds;
+    private static Float funds;
 
-    public static void addFunds(Float funds) {
-        _funds += funds;
+    public static void addFunds(Float fundsToAdd) {
+        funds += fundsToAdd;
     }
 }

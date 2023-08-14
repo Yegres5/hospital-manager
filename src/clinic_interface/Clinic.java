@@ -10,12 +10,4 @@ public class Clinic {
     public Clinic(String name) {
         this.name = name;
     }
-
-    public Administrator getAdministrator() {
-        return EmployeeManagerService.getAdministrator();
-    }
-
-    public Doctor getDoctor(Appointment appointment) {
-        return appointment.getDoctor();
-    }
 }
