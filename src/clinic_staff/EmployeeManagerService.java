@@ -8,7 +8,7 @@ import repository.MedicalTest;
 import java.util.ArrayList;
 
 public class EmployeeManagerService {
-    private static ArrayList<Employee> employees = new ArrayList<>();
+    private static final ArrayList<Employee> employees = new ArrayList<>();
 
     public static ArrayList<Doctor> getDoctorsList() {
         ArrayList<Doctor> doctors = new ArrayList<>();
@@ -42,5 +42,9 @@ public class EmployeeManagerService {
                 .filter(employee -> employee instanceof Administrator)
                 .findAny()
                 .orElse(null);
+    }
+
+    public static void addEmployee(Employee employee) {
+        employees.add(employee);
     }
 }

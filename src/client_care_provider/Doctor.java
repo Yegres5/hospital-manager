@@ -41,12 +41,13 @@ public class Doctor extends Employee {
 
     private String performBasicTest(Client client, BasicMedicalTest basicMedicalTest) {
         if (Objects.equals(client.getPersonalData(), "Sick")) {
-            return "Patient is sick";
+            return "Patient is sick.";
         }
         return null;
     }
 
     private String checkComplexTest(Client client, MedicalTestPackage medicalTestPackage) {
+        final String TEST_TESULT_SEPARATOR = "\n";
         Patient patient = terminal.getPatient(client);
         StringBuilder result = new StringBuilder();
 
@@ -54,6 +55,7 @@ public class Doctor extends Employee {
             Diagnosis diagnosis = terminal.getDiagnosis(patient, basicMedicalTest);
             if (diagnosis.isPositive()) {
                 result.append(diagnosis.getResult());
+                result.append(TEST_TESULT_SEPARATOR);
             }
         }
 

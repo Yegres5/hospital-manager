@@ -31,14 +31,18 @@ public class Client {
         return administrator.getMedicalTests();
     }
 
+    public MedicalTest recieveCheckUpTest(Administrator administrator) {
+        return administrator.getCheckUpTest();
+    }
+
     public ArrayList<Appointment> payForMedicalTest(Administrator administrator, MedicalTest medicalTest) {
         return administrator.processMedicalTestPayment( this, medicalTest);
     }
 
-    public Diagnosis visitAppointment(Clinic clinic, Appointment appointment) {
+    public Diagnosis visitAppointment(Appointment appointment) {
         Doctor doctor = appointment.getDoctor();
 
-        return doctor.provideAppointmentTest(this, appointment);
+        return doctor.provideAppointmentMedicalTest(this, appointment);
     }
 
     public Certificate getCertificate(Administrator administrator, MedicalTest medicalTest) {

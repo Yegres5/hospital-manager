@@ -1,4 +1,4 @@
-package repository.utils;
+package repository.util;
 
 import repository.Diagnosis;
 import repository.MedicalTest;

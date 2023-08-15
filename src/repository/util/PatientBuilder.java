@@ -1,4 +1,4 @@
-package repository.utils;
+package repository.util;
 
 import client_care_provider.Client;
 import repository.Patient;

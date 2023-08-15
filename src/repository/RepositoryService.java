@@ -3,9 +3,9 @@ package repository;
 import java.util.*;
 
 import client_care_provider.Client;
-import jdk.jshell.Diag;
-import repository.utils.CertificateBuilder;
-import repository.utils.DiagnosisBuilder;
+import repository.util.CertificateBuilder;
+import repository.util.DiagnosisBuilder;
+import repository.util.PatientBuilder;
 
 public class RepositoryService {
     static HashMap<Integer, Patient> patientByClientStateId = new HashMap<Integer, Patient>();
@@ -18,6 +18,10 @@ public class RepositoryService {
     }
 
     public static Patient getPatient(Client client) {
+        if (!patientByClientStateId.containsKey(client.getStateId())) {
+            Patient patient = new PatientBuilder(client).build();
+            patientByClientStateId.put(client.getStateId(), patient);
+        }
         return patientByClientStateId.get(client.getStateId());
     }
 
@@ -59,5 +63,9 @@ public class RepositoryService {
             );
         }
         return certificateByDiagnosisId.get(diagnosis.getId());
+    }
+
+    public static void addMedicalTest(MedicalTest medicalTest) {
+        medicalTests.add(medicalTest);
     }
 }
