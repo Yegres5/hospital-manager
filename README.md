@@ -15,9 +15,9 @@ could also be complex in which case it would have child services (__Service:chil
 In the case of the complex service, cost should be calculated by aggregating prices of the 
 child services and the price of the service itself (__Service:cost__).
 
-After choosing a service, the administrator could take an upfront payment 
+After choosing a service, the administrator could take an upfront clinic.payment 
 (__Administrator:recievePaymentForService(serviceId)__). As a result administrator 
-will create Service Status and after schedule an appointment with the doctor 
+will create Service Status and after clinic.schedule an appointment with the doctor 
 (__Administrator:scheduleAppointment(cliendId, doctorId)__) that will be given in a list 
 of the available ones (__Administrator:getDoctorsForService__).
 
