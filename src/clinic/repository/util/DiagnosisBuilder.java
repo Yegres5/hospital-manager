@@ -13,7 +13,6 @@ public class DiagnosisBuilder {
 
     public DiagnosisBuilder setMedicalTest(MedicalTest medicalTest) {
         this.medicalTest = medicalTest;
-        this.positive = true;
         return this;
     }
 
@@ -29,6 +28,7 @@ public class DiagnosisBuilder {
 
     public DiagnosisBuilder setMedicalReport(String medicalReport) {
         this.medicalReport = medicalReport;
+        if (this.medicalReport != null) this.positive = true;
         return this;
     }
 

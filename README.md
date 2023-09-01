@@ -6,52 +6,46 @@ Self-development decomposition task solution for hospital management system
 
 The module is designed to provide communication between hospital, employees(administrators and doctors), and clients.
 
-A client can check in through the administrator (__Administrator:checkIn(name, citizenId)__) 
-and ask for services provided by the clinic (__Administrator:getServiceList()__).
+Before client will receive any treatment can check-in through the administrator (__Administrator:createPatientCard(Client)__) and create a record (__PatientCard__) in clinic database. 
+Then he can ask for medical tests provided by the clinic (__Administrator:getMedicalTests()__).
 
-There can be multiple types of services (__Service:type__, Example: patient examination, 
-taking a blood test, ...) each of them could have a cost (__Service:cost__). The service 
-could also be complex in which case it would have child services (__Service:child service__). 
-In the case of the complex service, cost should be calculated by aggregating prices of the 
-child services and the price of the service itself (__Service:cost__).
+There can be multiple types of medical tests each of them has it's own name, cost and speciality of the doctor required for the treatment. 
+The medical tests could be packed in a package in which case it would have child services (__MedicalTestPackage:medicalTests__). 
+In the case of the complex service, cost will be defined only by the cost of the package.
 
-After choosing a service, the administrator could take an upfront clinic.payment 
-(__Administrator:recievePaymentForService(serviceId)__). As a result administrator 
-will create Service Status and after clinic.schedule an appointment with the doctor 
-(__Administrator:scheduleAppointment(cliendId, doctorId)__) that will be given in a list 
-of the available ones (__Administrator:getDoctorsForService__).
+After choosing a service, the administrator takes upfront payment and schedules an appointment for the medical test, or multiple ones in case of the medical test package (__Administrator:processMedicalTestRequest(Client, MedicalTest)__).
 
-The doctor provides the service at the appointment (__Doctor__:provideService(serviceStatusId)), 
-the outcome of the service is tracked by status (__Service Status:currentStatus__). 
-Service could be rescheduled (__Service Status:currentStatus__ Scheduled->Scheduled) 
-in case if the doctor would decide to send a patient for additional tests or in order to 
-fulfill the complex service requirements. For the complex services doctor verifies child 
-services results (__Service Status:positive__ and __Service Status:result__) in order 
-to determine the result of his service.
+The doctor fulfills the required obligations at the appointment and writes diagnosis (__Doctor:provideAppointmentMedicalTest(Appointment, Client)__). 
+Diagnosis could be ether positive or negative if certain disease during the appointment were found (__MedicalTest:positive__). In positive case the doctor would also attach medical report (__MedicalTest:medicalReport__).  
+For the complex services doctor verifies child medical tests results (__Diagnosis:positive__) in order to determine the result of the test package.
 
-After the client visits all of his appointments he can ask the administrator for the 
-certificate and pay for the provided services if he hasn't done it up front 
-(__Service Status:payed__). 
+After the client visits all of his appointments he can ask the administrator for a certificate (__Administrator:generateCertificate(Client client, MedicalTest medicalTest)__).
 
 Generated Certificate template:
 ```
-Certificate:
+Certificate for 'Check up' medical test.
 
-Service outcome is positive/negative
-Service Status:result (if the outcome is positive)
+You test positive for 'Check up'.
+Description: 
+Bad result for 'Blood check' test. Description: Patient is sick.
+Bad result for 'Pressure check' test. Description: Patient is sick.
+
+Curing doctor: Doctor Pathologist
+Test date: 10:36:16
 ```
 
 
-## Used design patterns
+## Used design patterns:
 
 Builder:
-* To create certificate for the client. __util.Certificate__
+* to create certificate for the client __repository.util.CertificateBuilder__. Simplifies Certificate generation by setting only Diagnosis and Date.
+* to create diagnosis for the client __repository.util.DiagnosisBuilder__. Simplifies Diagnosis generation by setting positive or negative result of the test by checking for the presence of the medical report.    
 
-Singleton:
-* To retrieve the clinic of the employee (for the administrator to add assets). __util.ClinicManager__
+Composite:
+* to create single interface for basic medical tests and packages (__MedicalTest__, __BasicMedicalTest__ ,__MedicalTestPackage__).
 
-Factory: 
-* To create employees for the clinic (administrator or doctor). __util.EmployeeFactory__
+Facade:
+* to isolate the complexity of interaction employees with the clinic (__AdministratorTerminal__, __DoctorTerminal__).
 
 ## Hospital management UML class diagram
 
